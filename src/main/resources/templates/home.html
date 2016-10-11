@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Home is where the playstaion is</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+
+{{^user}}
+<form action="/login" method="post">
+    <input type="text" placeholder="Enter Name" name="userName" required>
+    <input type="password" placeholder="Enter Password" name="password" required>
+    <button type="submit">Login</button>
+</form>
+{{/user}}
+
+{{#user}}
+<div style="color: white">Welcome, {{name}}!</div>
+<form action="/logout" method="post" style="display: inline">
+    <button type="submit">Logout</button>
+</form>
+
+<br><br>
+
+<div style="color: white">Filter Results:&nbsp
+    <a style="color: white" href="/">ALL</a>&nbsp|&nbsp
+    <a style="color: white" href="/?genre=adventure">Adventure</a>&nbsp|&nbsp
+    <a style="color: white" href="/?genre=rpg">RPG</a>&nbsp|&nbsp
+    <a style="color: white" href="/?genre=strategy">Strategy</a>&nbsp|&nbsp
+    <a style="color: white" href="/?genre=shooter">Shooter</a>
+</div>
+
+
+<br><br>
+
+<form action="/" method="get">
+    <input type="text" placeholder="Search" name="search">
+    <button type="submit">Search</button>
+</form>
+<br>
+
+<form action="/add-game" method="post">
+    <input type="text" placeholder="Name" name="gameName">
+    <select class="select" name="gameGenre">
+        <option selected disabled>Genre</option>
+        <option value="adventure">Adventure</option>
+        <option value="rpg">RPG</option>
+        <option value="strategy">Strategy</option>
+        <option value="shooter">Shooter</option>
+    </select>
+    <select class="select" name="gamePlatform">
+        <option selected disabled>Platform</option>
+        <option value="pc">PC</option>
+        <option value="ps4">PS4</option>
+        <option value="Xbox One">Xbox One</option>
+        <option value="Wii U">Wii U</option>
+    </select>
+    <input type="number" placeholder="Release Year" name="gameYear">
+    <button type="submit">Submit</button>
+</form>
+
+<ol style="color: azure">
+    {{#games}}
+    <li>{{name}}, {{platform}}, {{genre}}, {{releaseYear}}</li>
+    {{/games}}
+</ol>
+{{/user}}
+
+</body>
+</html>
